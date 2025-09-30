@@ -6,7 +6,7 @@ API para gerenciar produtos (CRUD) usando **Node.js, TypeScript, Express, Prisma
 
 1. Clone o projeto:  
 ```bash
-git clone <link-do-projeto>
+git clone https://github.com/Mariocbneto/sistema-produtos.git
 cd sistema-produtos
 npm install
 npx prisma db push
