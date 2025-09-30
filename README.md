@@ -14,6 +14,8 @@ npm run dev
 http://localhost:3000
 
 ```
+Todas as requisições devem usar http://localhost:3000/produtos como base
+
 Endpoints
 Método	                URL	                                 Descrição	              Body (JSON) Exemplo
 POST	              /produtos	                        Criar produto	              { "nome": "Produto A", "preco": 10.5, "estoque": 20 }
