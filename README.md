@@ -30,3 +30,8 @@ npm run dev
 http://localhost:3000
 http://localhost:3000/api-docs
 ````
+
+## Deletar Todos os Arquivos
+```bash
+npx prisma migrate reset --force
+````
