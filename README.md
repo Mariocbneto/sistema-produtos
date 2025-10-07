@@ -1,35 +1,32 @@
 # Sistema Produtos
 
-API para gerenciar produtos (CRUD) usando **Node.js, TypeScript, Express, Prisma e SQLite**.  
+**Atividade Full Stack da faculdade**  
+API para gerenciar produtos, categorias e usuários, usando **Node.js, TypeScript, Express, Prisma, PostgreSQL e Zod**.  
+Inclui validações de dados e documentação via **Swagger**.
+
+---
 
 ## Como rodar
 
-1. Clone o projeto:  
+1. Clone o projeto:
 ```bash
 git clone https://github.com/Mariocbneto/sistema-produtos.git
 cd sistema-produtos
 npm install
-npx prisma db push
+````
+
+## Configure o banco PostgreSQL no arquivo .env:
+```bash
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/clinica_db"
+````
+## Crie e sincronize o banco com Prisma:
+```bash
+npx prisma migrate dev --name init
+````
+## Inicie o servidor:
+```bash
 npm run dev
+
 http://localhost:3000
-
-```
-Todas as requisições devem usar http://localhost:3000/produtos como base
-
-Endpoints
-Método	                URL	                                 Descrição	              Body (JSON) Exemplo
-POST	              /produtos	                        Criar produto	              { "nome": "Produto A", "preco": 10.5, "estoque": 20 }
-GET	                  /produtos	                        Listar todos	–
-GET	                  /produtos/:id	                    Buscar por ID	–
-PUT	                  /produtos/:id	                    Atualizar produto	          { "nome": "Produto A Atualizado", "preco": 12.0, "estoque": 25 }
-DELETE	              /produtos/:id	                    Deletar produto	–
-
-
-Dependências principais:
-
-express
-typescript
-tsx
-prisma
-zod
-dotenv
+http://localhost:3000/api-docs
+````
