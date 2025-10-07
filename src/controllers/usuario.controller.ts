@@ -1,8 +1,26 @@
-import { PrismaClient } from "@prisma/client";
+// src/controllers/usuario.controller.ts
 import { Request, Response } from "express";
-import { usuarioSchema } from "../validators/usuario.validator"; // cria esse Zod também
+import { prisma } from "../prisma";
+import { z } from "zod";
 
-const prisma = new PrismaClient();
+const usuarioSchema = z.object({
+  nome: z.string().min(1, "Nome é obrigatório"),
+  email: z.string().email("Email inválido"),
+  senha: z.string().min(4, "Senha deve ter ao menos 4 caracteres"),
+});
+
+export const createUsuario = async (req: Request, res: Response) => {
+  try {
+    const parsed = usuarioSchema.parse(req.body);
+    const usuario = await prisma.usuario.create({
+      data: parsed,
+    });
+    res.status(201).json(usuario);
+  } catch (err: any) {
+    console.error(err);
+    res.status(500).json({ error: "Erro ao criar usuário" });
+  }
+};
 
 export const getUsuarios = async (req: Request, res: Response) => {
   try {
@@ -26,28 +44,17 @@ export const getUsuario = async (req: Request, res: Response) => {
   }
 };
 
-export const createUsuario = async (req: Request, res: Response) => {
-  try {
-    const parsed = usuarioSchema.parse(req.body);
-    const usuario = await prisma.usuario.create({ data: parsed });
-    res.status(201).json(usuario);
-  } catch (error: any) {
-    if (error.errors) return res.status(400).json({ errors: error.errors });
-    res.status(500).json({ error: "Erro ao criar usuário" });
-  }
-};
-
 export const updateUsuario = async (req: Request, res: Response) => {
   try {
-    const parsed = usuarioSchema.parse(req.body);
     const { id } = req.params;
+    const parsed = usuarioSchema.parse(req.body);
     const usuario = await prisma.usuario.update({
       where: { id: Number(id) },
       data: parsed,
     });
     res.json(usuario);
-  } catch (error: any) {
-    if (error.errors) return res.status(400).json({ errors: error.errors });
+  } catch (err: any) {
+    console.error(err);
     res.status(500).json({ error: "Erro ao atualizar usuário" });
   }
 };

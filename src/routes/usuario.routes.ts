@@ -1,3 +1,4 @@
+// src/routes/usuario.routes.ts
 import { Router } from "express";
 import {
   createUsuario,
@@ -12,7 +13,7 @@ const router = Router();
 /**
  * @swagger
  * tags:
- *   name: Usuarios
+ *   name: Usuários
  *   description: Endpoints de gerenciamento de usuários
  */
 
@@ -21,7 +22,7 @@ const router = Router();
  * /usuarios:
  *   get:
  *     summary: Retorna todos os usuários
- *     tags: [Usuarios]
+ *     tags: [Usuários]
  *     responses:
  *       200:
  *         description: Lista de usuários retornada com sucesso
@@ -33,7 +34,7 @@ router.get("/", getUsuarios);
  * /usuarios/{id}:
  *   get:
  *     summary: Retorna um usuário pelo ID
- *     tags: [Usuarios]
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: id
@@ -53,7 +54,7 @@ router.get("/:id", getUsuario);
  * /usuarios:
  *   post:
  *     summary: Cria um novo usuário
- *     tags: [Usuarios]
+ *     tags: [Usuários]
  *     requestBody:
  *       required: true
  *       content:
@@ -78,7 +79,7 @@ router.post("/", createUsuario);
  * /usuarios/{id}:
  *   put:
  *     summary: Atualiza um usuário pelo ID
- *     tags: [Usuarios]
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: id
@@ -90,7 +91,14 @@ router.post("/", createUsuario);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Usuario'
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Usuário atualizado com sucesso
@@ -102,7 +110,7 @@ router.put("/:id", updateUsuario);
  * /usuarios/{id}:
  *   delete:
  *     summary: Deleta um usuário pelo ID
- *     tags: [Usuarios]
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: id
